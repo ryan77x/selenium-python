@@ -17,47 +17,47 @@ class AdminLogin(unittest.TestCase):
         self.driver.implicitly_wait(10)
         self.driver.get("https://www.phptravels.net/admin")
 
-    # def test_login_invalid_password(self):
+    def test_login_invalid_password(self):
 
-    #     admin_login_page = page.AdminLoginPage(self.driver)
-    #     self.login_helper(admin_login_page, "admin@phptravels.com", "badpassword", 2)
-    #     self.assertEqual(admin_login_page.get_invalid_login_alert_message(), "Invalid Login Credentials")
+        admin_login_page = page.AdminLoginPage(self.driver)
+        self.login_helper(admin_login_page, "admin@phptravels.com", "badpassword", 2)
+        self.assertIn(admin_login_page.get_invalid_login_alert_message(), "Invalid Login Credentials")
 
-    # def test_login_empty_username_and_password(self):
+    def test_login_empty_username_and_password(self):
 
-    #     admin_login_page = page.AdminLoginPage(self.driver)
-    #     self.login_helper(admin_login_page, "", "", 2)
-    #     self.assertEqual(admin_login_page.get_page_title(), "Administator Login")
+        admin_login_page = page.AdminLoginPage(self.driver)
+        self.login_helper(admin_login_page, "", "", 2)
+        self.assertIn(admin_login_page.get_page_title(), "Administator Login")
 
-    # def test_login_invalid_username(self):
+    def test_login_invalid_username(self):
 
-    #     admin_login_page = page.AdminLoginPage(self.driver)
-    #     self.login_helper(admin_login_page, "invalid@test.com", "demoadmin", 2)
-    #     self.assertEqual(admin_login_page.get_page_title(), "Administator Login")
+        admin_login_page = page.AdminLoginPage(self.driver)
+        self.login_helper(admin_login_page, "invalid@test.com", "demoadmin", 2)
+        self.assertEqual(admin_login_page.get_page_title(), "Administator Login")
 
-    # def test_login_invalid_username_and_password(self):
+    def test_login_invalid_username_and_password(self):
 
-    #     admin_login_page = page.AdminLoginPage(self.driver)
-    #     self.login_helper(admin_login_page, "invalid@test.com", "badpassword", 2)
-    #     self.assertEqual(admin_login_page.get_page_title(), "Administator Login")
+        admin_login_page = page.AdminLoginPage(self.driver)
+        self.login_helper(admin_login_page, "invalid@test.com", "badpassword", 2)
+        self.assertEqual(admin_login_page.get_page_title(), "Administator Login")
 
-    # def test_login_empty_username(self):
+    def test_login_empty_username(self):
 
-    #     admin_login_page = page.AdminLoginPage(self.driver)
-    #     self.login_helper(admin_login_page, "", "demoadmin", 2)
-    #     self.assertEqual(admin_login_page.get_page_title(), "Administator Login")      
+        admin_login_page = page.AdminLoginPage(self.driver)
+        self.login_helper(admin_login_page, "", "demoadmin", 2)
+        self.assertEqual(admin_login_page.get_page_title(), "Administator Login")      
 
-    # def test_login_empty_password(self):
+    def test_login_empty_password(self):
 
-    #     admin_login_page = page.AdminLoginPage(self.driver)
-    #     self.login_helper(admin_login_page, "admin@phptravels.com", "", 2)
-    #     self.assertEqual(admin_login_page.get_page_title(), "Administator Login")     
+        admin_login_page = page.AdminLoginPage(self.driver)
+        self.login_helper(admin_login_page, "admin@phptravels.com", "", 2)
+        self.assertEqual(admin_login_page.get_page_title(), "Administator Login")     
 
-    # def test_login_invalid_email_format(self):
+    def test_login_invalid_email_format(self):
 
-    #     admin_login_page = page.AdminLoginPage(self.driver)
-    #     self.login_helper(admin_login_page, "admin", "demoadmin", 2)
-    #     self.assertEqual(admin_login_page.get_invalid_email_format_alert_message(), "The Email field must contain a valid email address.")
+        admin_login_page = page.AdminLoginPage(self.driver)
+        self.login_helper(admin_login_page, "admin", "demoadmin", 2)
+        self.assertEqual(admin_login_page.get_invalid_login_alert_message(), "The Email field must contain a valid email address.")
 
     def test_login_valid_credential(self):
 
@@ -71,10 +71,8 @@ class AdminLogin(unittest.TestCase):
 
     def login_helper(self, admin_login_page, user_name, password, sleep_time):
 
-        self.assertEqual(admin_login_page.get_page_title(), "Administator Login")
-        admin_login_page.input_user_name(user_name)
-        admin_login_page.input_password(password)
-        admin_login_page.click_login_button()
+        self.assertIn(admin_login_page.get_page_title(), "Administator Login")
+        admin_login_page.login(user_name, password)
         time.sleep(sleep_time)
 
 suite = unittest.TestLoader().loadTestsFromTestCase(AdminLogin)
